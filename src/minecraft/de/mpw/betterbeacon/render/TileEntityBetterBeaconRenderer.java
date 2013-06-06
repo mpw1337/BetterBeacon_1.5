@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 public class TileEntityBetterBeaconRenderer extends TileEntitySpecialRenderer {
 
+	//private ModelBetterBeaconTechne model = new ModelBetterBeaconTechne();
 	private ModelBetterBeaconTechne model = new ModelBetterBeaconTechne();
 	//This method is called when minecraft renders a tile entity
     public void renderTileEntityAt(TileEntity tileEntity, double d, double d1, double d2, float f) {
@@ -49,7 +50,10 @@ public class TileEntityBetterBeaconRenderer extends TileEntitySpecialRenderer {
          //This line actually rotates the renderer.
          GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
          GL11.glTranslatef(-0.5F, 0, -0.5F);
-         bindTextureByName(CommonProxy.BETTER_BEACON_TEXTURE);
+         //bindTextureByName(CommonProxy.BETTER_BEACON_TEXTURE);
+         bindTextureByName("/de/mpw/betterbeacon/render/BetterBeacon.png");
+         //ModelBetterBeaconTechne temp = new ModelBetterBeaconTechne();
+         //temp.render(tl, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
          this.model.render(tl, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
         GL11.glPopMatrix();
