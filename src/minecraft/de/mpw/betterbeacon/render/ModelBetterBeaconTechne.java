@@ -29,20 +29,23 @@ public class ModelBetterBeaconTechne extends ModelBase
     textureHeight = 32;
     
       Glass = new ModelRenderer(this, 0, 0);
-      Glass.addBox(-8F, -8F, -8F, 16, 16, 16);
+//      Glass.addBox(-8F, -8F, -8F, 16, 16, 16);
+      Glass.addBox(0F, -8F, 0F, 16, 16, 16);
       Glass.setRotationPoint(0F, 16F, 0F);
       Glass.setTextureSize(128, 32);
       Glass.mirror = true;
       setRotation(Glass, 0F, 0F, 0F);
       Base = new ModelRenderer(this, 64, 0);
-      Base.addBox(-7F, -8F, -7F, 14, 2, 14);
+//      Base.addBox(-7F, -8F, -7F, 14, 2, 14);
+      Base.addBox(1F, -8F, 1F, 14, 2, 14);
       Base.setRotationPoint(0F, 16F, 0F);
       Base.setTextureSize(128, 32);
       Base.mirror = true;
       setRotation(Base, 0F, 0F, 0F);
       InnerBlock = new ModelRenderer(this, 64, 16);
+//      InnerBlock.addBox(-4F, -4F, -4F, 8, 8, 8);
       InnerBlock.addBox(-4F, -4F, -4F, 8, 8, 8);
-      InnerBlock.setRotationPoint(0F, 18F, 0F);
+      InnerBlock.setRotationPoint(8F, 16F, 8F);
       InnerBlock.setTextureSize(128, 32);
       InnerBlock.mirror = true;
       setRotation(InnerBlock, 0F, 0.7853982F, 0.7853982F);
@@ -57,7 +60,7 @@ public class ModelBetterBeaconTechne extends ModelBase
     InnerBlock.rotateAngleX =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
     InnerBlock.rotateAngleY =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
     InnerBlock.rotateAngleZ =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
-    //InnerBlock.rotateAngleX = (float)(1/4F * Math.PI);
+    //*///InnerBlock.rotateAngleX = (float)(1/4F * Math.PI);
     //InnerBlock.rotateAngleY = (float)(1/4 * Math.PI);
     //InnerBlock.rotateAngleZ = (float)(1/4F * Math.PI);
     

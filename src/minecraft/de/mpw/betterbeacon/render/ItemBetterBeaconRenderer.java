@@ -35,13 +35,17 @@ public class ItemBetterBeaconRenderer implements IItemRenderer {
 		switch(type)
 		{
 			case ENTITY:{
-				renderTutBox(0f, 0f, -0.1F, 1f);
+				renderTutBox(0f, -1f, 0F, 1f);
 				return;
 			}
 			
 			case EQUIPPED:{
-				//renderTutBox(0.5F, -0.5F, 0.5F, 0.8f);
-				renderTutBox(0f, 1f, 1f, 0.5f);
+				renderTutBox(0.5F, -0.5F, 0.5F, 1.0f);
+				//renderTutBox(0f, 1f, 1f, 1.5f);
+				return;
+			}
+			case EQUIPPED_FIRST_PERSON:{
+				renderTutBox(0.5f, -0.5f, 0.5f, 1.0f);
 				return;
 			}
 				
@@ -65,7 +69,7 @@ public class ItemBetterBeaconRenderer implements IItemRenderer {
 		GL11.glRotatef(180f, 0f, 1f, 0f);
 		
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(CommonProxy.BETTER_BEACON_TEXTURE);
-		
+		GL11.glTranslatef(-0.5F, 0, -0.5F);
 		model.render(x,y,z);
 		
 		// Re-enable Lighting Calculations
