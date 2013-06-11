@@ -60,6 +60,7 @@ public class ModelBetterBeaconTechne extends ModelBase
     InnerBlock.rotateAngleX =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
     InnerBlock.rotateAngleY =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
     InnerBlock.rotateAngleZ =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
+    InnerBlock.rotationPointY = 16f +(float) Math.sin(((((entity.worldObj.getWorldTime()) % 360)-180)/180F*Math.PI));
     //*///InnerBlock.rotateAngleX = (float)(1/4F * Math.PI);
     //InnerBlock.rotateAngleY = (float)(1/4 * Math.PI);
     //InnerBlock.rotateAngleZ = (float)(1/4F * Math.PI);
