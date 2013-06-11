@@ -54,10 +54,14 @@ public class ModelBetterBeaconTechne extends ModelBase
     setRotationAngles(f, f1, f2, f3, f4, f5);
     Glass.render(f5);
     Base.render(f5);
-    InnerBlock.rotateAngleX =(float)(((entity.worldObj.getWorldTime()*4 % 360)-180)/180F*Math.PI);
-    InnerBlock.rotateAngleY =-1F * (float)(((entity.worldObj.getWorldTime()*4 % 360)-180)/180F*Math.PI);
-    //InnerBlock.rotateAngleZ =(float)(((entity.worldObj.getWorldTime()*4 % 360)-180)/180F*Math.PI);    
-    System.out.println(InnerBlock.rotateAngleX);
+    InnerBlock.rotateAngleX =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
+    InnerBlock.rotateAngleY =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
+    InnerBlock.rotateAngleZ =(float)((((entity.worldObj.getWorldTime()*0.8) % 360)-180)/180F*Math.PI);
+    //InnerBlock.rotateAngleX = (float)(1/4F * Math.PI);
+    //InnerBlock.rotateAngleY = (float)(1/4 * Math.PI);
+    //InnerBlock.rotateAngleZ = (float)(1/4F * Math.PI);
+    
+    //System.out.println(InnerBlock.rotateAngleX);
     InnerBlock.render(f5);
   }
   

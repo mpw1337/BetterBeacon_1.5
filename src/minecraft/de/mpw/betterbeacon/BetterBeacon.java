@@ -48,7 +48,7 @@ public class BetterBeacon {
 
 	@Init
 	public void load(FMLInitializationEvent event) {
-		proxy.registerRenderers();
+		proxy.initializeRendering();
 		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
 		GameRegistry.registerBlock(betterBeacon,"betterBeacon");
 		LanguageRegistry.addName(betterBeacon, "Better Beacon");

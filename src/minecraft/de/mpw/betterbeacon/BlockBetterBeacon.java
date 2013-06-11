@@ -1,5 +1,6 @@
 package de.mpw.betterbeacon;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBeacon;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,10 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.world.World;
 
-public class BlockBetterBeacon extends BlockBeacon {
+public class BlockBetterBeacon extends BlockContainer {
 
 	public BlockBetterBeacon(int par1) {
-		super(par1/*,Material.glass*/);
+		super(par1,Material.glass);
         this.setHardness(3.0F);
         setCreativeTab(CreativeTabs.tabMisc);
 		setLightValue(1.0F);
@@ -20,7 +21,6 @@ public class BlockBetterBeacon extends BlockBeacon {
 
 	}
 
-	@Override
 	public TileEntity createNewTileEntity(World par1World) {
 		return new TileEntityBetterBeacon();
 	}
@@ -46,6 +46,10 @@ public class BlockBetterBeacon extends BlockBeacon {
     {
         return false;
     }
+	public boolean isOpaqueCube(){
+		return false;
+		
+	}
 	public int getRenderType()
     {
         //return 34;
