@@ -6,10 +6,13 @@ import org.lwjgl.opengl.GL11;
 
 import de.mpw.betterbeacon.CommonProxy;
 import de.mpw.betterbeacon.TileEntityBetterBeacon;
+import de.mpw.betterbeacon.render.ModelBetterBeacon;
+import de.mpw.betterbeacon.render.ModelBetterBeaconTechne;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerBeacon;
@@ -20,11 +23,13 @@ import net.minecraft.util.StatCollector;
 public class GuiBetterBeacon extends GuiContainer {
 
 	private TileEntityBetterBeacon beacon;
+	private ModelBetterBeaconTechne model;
 
 	public GuiBetterBeacon(InventoryPlayer inventory, TileEntityBetterBeacon tile_entity) {
 		super(new ContainerBetterBeacon(tile_entity, inventory));
 		//super(new ContainerBeacon(inventory, tile_entity));
 		this.beacon = tile_entity;
+		this .model = new ModelBetterBeaconTechne();
         this.xSize = 230;
         this.ySize = 219;
 	}
@@ -107,7 +112,7 @@ public class GuiBetterBeacon extends GuiContainer {
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + 42 + 22, l + 109);
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + 42 + 44, l + 109);
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + 42 + 66, l + 109);
-		itemRenderer.zLevel = 0.0F;
+		itemRenderer.zLevel = 0.0F;		
 
 	}
 

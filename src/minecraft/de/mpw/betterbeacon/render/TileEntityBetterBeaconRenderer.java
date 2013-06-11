@@ -51,9 +51,9 @@ public class TileEntityBetterBeaconRenderer extends TileEntitySpecialRenderer {
          GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
          GL11.glTranslatef(-0.5F, 0, -0.5F);
          bindTextureByName(CommonProxy.BETTER_BEACON_TEXTURE);
-         ModelBetterBeaconTechne temp = new ModelBetterBeaconTechne();
-         temp.render(tl, 0.0F, 0.0F, -0.0F, 0.0F, 0.0F, 0.0625F);
-         //this.model.render(tl, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+         //ModelBetterBeaconTechne temp = new ModelBetterBeaconTechne();
+         //temp.render(tl, 0.0F, 0.0F, -0.0F, 0.0F, 0.0F, 0.0625F);
+         this.model.render(tl, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
         GL11.glPopMatrix();
     }
