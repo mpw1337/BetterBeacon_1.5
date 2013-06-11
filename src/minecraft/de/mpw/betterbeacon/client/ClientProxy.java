@@ -12,6 +12,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void initializeRendering(){		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBetterBeacon.class, new TileEntityBetterBeaconRenderer());
+		MinecraftForgeClient.registerItemRenderer(BetterBeacon.betterBeacon.blockID, new ItemBetterBeaconRenderer());
 	}
 	
 }

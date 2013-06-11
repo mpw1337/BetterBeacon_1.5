@@ -18,10 +18,10 @@ public class TileEntityBetterBeaconRenderer extends TileEntitySpecialRenderer {
 	//private ModelBetterBeaconTechne model = new ModelBetterBeaconTechne();
 	private ModelBetterBeaconTechne model = new ModelBetterBeaconTechne();
 	//This method is called when minecraft renders a tile entity
-    public void renderTileEntityAt(TileEntity tileEntity, double d, double d1, double d2, float f) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
         GL11.glPushMatrix();
          //This will move our renderer so that it will be on proper place in the world
-         GL11.glTranslatef((float)d, (float)d1, (float)d2);
+         GL11.glTranslatef((float)x, (float)y, (float)z);
          TileEntityBetterBeacon tileEntityBetterBeacon = (TileEntityBetterBeacon)tileEntity;
          /*Note that true tile entity coordinates (tileEntity.xCoord, etc) do not match to render coordinates (d, etc) that are calculated as [true coordinates] - [player coordinates (camera coordinates)]*/
          renderBetterBeaconBlock(tileEntityBetterBeacon, tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, BetterBeacon.betterBeacon);

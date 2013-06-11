@@ -64,6 +64,12 @@ public class ModelBetterBeaconTechne extends ModelBase
     //System.out.println(InnerBlock.rotateAngleX);
     InnerBlock.render(f5);
   }
+  public void render(float x, float y,float z){
+	  	super.setRotationAngles(x, y, z, 0, 0, 0, null);
+	    Glass.render(0.0625F);
+	    Base.render(0.0625F);
+	    InnerBlock.render(0.0625F);
+  }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
