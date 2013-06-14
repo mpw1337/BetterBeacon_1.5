@@ -29,7 +29,6 @@ public class GuiBetterBeacon extends GuiContainer {
 		super(new ContainerBetterBeacon(tile_entity, inventory));
 		//super(new ContainerBeacon(inventory, tile_entity));
 		this.beacon = tile_entity;
-		this .model = new ModelBetterBeaconTechne();
         this.xSize = 230;
         this.ySize = 219;
 	}
@@ -39,13 +38,15 @@ public class GuiBetterBeacon extends GuiContainer {
 		super.initGui();
 		this.buttonList.add(new GuiButton(1,this.guiLeft+155, this.guiTop+ 108,22,20, "OK"));
 		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft+185, this.guiTop + 108, 22, 22, CommonProxy.BETTER_BEACON_GUI, 88, 219));
+		this.buttonList.add(new GuiBetterBeaconEffect(3, this.guiLeft+40, this.guiTop + 22, 18, 18, 1, this));
 		
 	}
 
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		
+/*		((GuiBetterBeaconEffect)this.buttonList.get(2)).xPosition = this.guiLeft + 40;
+		((GuiBetterBeaconEffect)this.buttonList.get(2)).yPosition = this.guiTop + 22;*/
 	}
 
 	@Override

@@ -6,14 +6,28 @@ import de.mpw.betterbeacon.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
+/**
+ * @author Markus
+ *
+ */
 public class GuiBetterBeaconButton extends GuiButton {
 
-	private String buttonTexture;
-	private int u;
-	private int v;
-	private boolean mouseOverButton;
-	private boolean activated;
+	protected String buttonTexture;
+	protected int u;
+	protected int v;
+	protected boolean mouseOverButton;
+	protected boolean activated;
 
+	/**
+	 * @param id of the GUI element (used in onButtonPressed Event)
+	 * @param xPos
+	 * @param yPos
+	 * @param width
+	 * @param height
+	 * @param textureString to the png of the button
+	 * @param u x offset of the texture
+	 * @param v y offset of the texture
+	 */
 	public GuiBetterBeaconButton(int id, int xPos, int yPos, int width, int height, String textureString, int u, int v) {
 		super(id, xPos, yPos, width, height, "");
 		this.buttonTexture = textureString;
@@ -21,11 +35,15 @@ public class GuiBetterBeaconButton extends GuiButton {
 		this.v = v;
 		this.activated = false;
 	}
+	
 
+	/* (non-Javadoc)
+	 * @see net.minecraft.client.gui.GuiButton#drawButton(net.minecraft.client.Minecraft, int, int)
+	 */
 	@Override
 	public void drawButton(Minecraft minecraft, int mxPos, int myPos) {
 		if (this.drawButton){
-			minecraft.renderEngine.bindTexture(CommonProxy.BETTER_BEACON_GUI);
+			minecraft.renderEngine.bindTexture(buttonTexture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.mouseOverButton = mxPos >= this.xPosition && myPos >= this.yPosition && mxPos < this.xPosition + this.width && myPos < this.yPosition + this.height;
 			short buttonYPos = 219;
