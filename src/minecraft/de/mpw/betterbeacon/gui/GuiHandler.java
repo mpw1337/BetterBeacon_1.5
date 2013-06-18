@@ -13,21 +13,19 @@ public class GuiHandler implements IGuiHandler {
 	}
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-		if(tile_entity instanceof TileEntityBetterBeacon){
+		if (tile_entity instanceof TileEntityBetterBeacon) {
 			return new ContainerBetterBeacon((TileEntityBetterBeacon) tile_entity, player.inventory);
 		}
 		return null;
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-		if(tile_entity instanceof TileEntityBetterBeacon){
-			return new GuiBetterBeacon(player.inventory,(TileEntityBetterBeacon) tile_entity);
+		if (tile_entity instanceof TileEntityBetterBeacon) {
+			return new GuiBetterBeacon(player.inventory, (TileEntityBetterBeacon) tile_entity);
 		}
 		return null;
 	}

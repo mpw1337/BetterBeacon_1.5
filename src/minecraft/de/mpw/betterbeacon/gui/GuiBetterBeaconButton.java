@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 
 /**
  * @author Markus
- *
+ * 
  */
 public class GuiBetterBeaconButton extends GuiButton {
 
@@ -19,14 +19,18 @@ public class GuiBetterBeaconButton extends GuiButton {
 	protected boolean activated;
 
 	/**
-	 * @param id of the GUI element (used in onButtonPressed Event)
+	 * @param id
+	 *            of the GUI element (used in onButtonPressed Event)
 	 * @param xPos
 	 * @param yPos
 	 * @param width
 	 * @param height
-	 * @param textureString to the png of the button
-	 * @param u x offset of the texture
-	 * @param v y offset of the texture
+	 * @param textureString
+	 *            to the png of the button
+	 * @param u
+	 *            x offset of the texture
+	 * @param v
+	 *            y offset of the texture
 	 */
 	public GuiBetterBeaconButton(int id, int xPos, int yPos, int width, int height, String textureString, int u, int v) {
 		super(id, xPos, yPos, width, height, "");
@@ -35,31 +39,42 @@ public class GuiBetterBeaconButton extends GuiButton {
 		this.v = v;
 		this.activated = false;
 	}
-	
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.client.gui.GuiButton#drawButton(net.minecraft.client.Minecraft, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.client.gui.GuiButton#drawButton(net.minecraft.client.Minecraft
+	 * , int, int)
 	 */
 	@Override
 	public void drawButton(Minecraft minecraft, int mxPos, int myPos) {
-		if (this.drawButton){
+		if (this.drawButton) {
 			minecraft.renderEngine.bindTexture(buttonTexture);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.mouseOverButton = mxPos >= this.xPosition && myPos >= this.yPosition && mxPos < this.xPosition + this.width && myPos < this.yPosition + this.height;
+			this.mouseOverButton = mxPos >= this.xPosition && myPos >= this.yPosition && mxPos < this.xPosition + this.width
+					&& myPos < this.yPosition + this.height;
 			short buttonYPos = 219;
 			int k = 0;
-			if(!this.enabled){
-				k+=this.width * 2;
-			}else if (this.activated){
+			if (!this.enabled) {
+				k += this.width * 2;
+			} else if (this.activated) {
 				k += this.width * 1;
-			}else if(this.mouseOverButton){
-				k+= this.width * 3;
+			} else if (this.mouseOverButton) {
+				k += this.width * 3;
 			}
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, k, buttonYPos, this.width, this.height);
-			this.drawTexturedModalRect(this.xPosition, this.yPosition,u, v, this.width, this.height);
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, u, v, this.width, this.height);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @return is the Mouse over the button
+	 * 
+	 * @see net.minecraft.client.gui.GuiButton#func_82252_a()
+	 */
 	@Override
 	public boolean func_82252_a() {
 		return this.mouseOverButton;

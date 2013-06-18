@@ -23,37 +23,46 @@ import net.minecraft.util.StatCollector;
 public class GuiBetterBeacon extends GuiContainer {
 
 	private TileEntityBetterBeacon beacon;
-	private ModelBetterBeaconTechne model;
 
+	/**
+	 * @param inventory
+	 *            of the interacting player
+	 * @param tile_entity
+	 *            of the clicked beacon
+	 */
 	public GuiBetterBeacon(InventoryPlayer inventory, TileEntityBetterBeacon tile_entity) {
 		super(new ContainerBetterBeacon(tile_entity, inventory));
-		//super(new ContainerBeacon(inventory, tile_entity));
+		// super(new ContainerBeacon(inventory, tile_entity));
 		this.beacon = tile_entity;
-        this.xSize = 230;
-        this.ySize = 219;
+		this.xSize = 230;
+		this.ySize = 219;
 	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
-		this.buttonList.add(new GuiButton(1,this.guiLeft+155, this.guiTop+ 108,22,20, "OK"));
-		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft+185, this.guiTop + 108, 22, 22, CommonProxy.BETTER_BEACON_GUI, 88, 219));
-		this.buttonList.add(new GuiBetterBeaconEffect(3, this.guiLeft+40, this.guiTop + 22, 18, 18, 1, this));
-		
+		this.buttonList.add(new GuiButton(1, this.guiLeft + 155, this.guiTop + 108, 22, 20, "OK"));
+		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft + 185, this.guiTop + 108, 22, 22, CommonProxy.BETTER_BEACON_GUI, 88, 219));
+		this.buttonList.add(new GuiBetterBeaconEffect(3, this.guiLeft + 40, this.guiTop + 22, 18, 18, 1, this));
+
 	}
 
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-/*		((GuiBetterBeaconEffect)this.buttonList.get(2)).xPosition = this.guiLeft + 40;
-		((GuiBetterBeaconEffect)this.buttonList.get(2)).yPosition = this.guiTop + 22;*/
+		/*
+		 * ((GuiBetterBeaconEffect)this.buttonList.get(2)).xPosition =
+		 * this.guiLeft + 40;
+		 * ((GuiBetterBeaconEffect)this.buttonList.get(2)).yPosition =
+		 * this.guiTop + 22;
+		 */
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		
+
 		super.actionPerformed(par1GuiButton);
-		
+
 	}
 
 	// This method is required and all it does is draw the foreground
@@ -66,26 +75,25 @@ public class GuiBetterBeacon extends GuiContainer {
 		// @param int 6, this is the yCoord on the screen
 		// @param 0xffffff, this is the color in hex, 0xffffff, is white,
 		// 0x000000 is black BTW
-		//fontRenderer.drawString("Tutorial Gui", 6, 6, 0xffffff);
+		// fontRenderer.drawString("Tutorial Gui", 6, 6, 0xffffff);
 		// This draws the caption for the players inventory this is not needed
 		// as the above but is sometimes nice
-		//fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 6, ySize - 96 + 2, 0xffffff);
+		// fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"),
+		// 6, ySize - 96 + 2, 0xffffff);
 		RenderHelper.disableStandardItemLighting();
-        this.drawCenteredString(fontRenderer, "Level:" + beacon.getLevels(), 30, 13, 14737632);
-        Iterator iterator = this.buttonList.iterator();
+		this.drawCenteredString(fontRenderer, "Level:" + beacon.getLevels(), 30, 13, 14737632);
+		Iterator iterator = this.buttonList.iterator();
 
-        while (iterator.hasNext())
-        {
-            GuiButton guibutton = (GuiButton)iterator.next();
+		while (iterator.hasNext()) {
+			GuiButton guibutton = (GuiButton) iterator.next();
 
-            if (guibutton.func_82252_a())
-            {
-                guibutton.func_82251_b(par1 - this.guiLeft, par2 - this.guiTop);
-                break;
-            }
-        }
+			if (guibutton.func_82252_a()) {
+				guibutton.func_82251_b(par1 - this.guiLeft, par2 - this.guiTop);
+				break;
+			}
+		}
 
-        RenderHelper.enableGUIStandardItemLighting();
+		RenderHelper.enableGUIStandardItemLighting();
 	}
 
 	// This is another required method and has 3 params
@@ -107,13 +115,14 @@ public class GuiBetterBeacon extends GuiContainer {
 		this.mc.renderEngine.bindTexture(CommonProxy.BETTER_BEACON_GUI);
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
+		// Draws the main gui texture to the center of the screen
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		itemRenderer.zLevel = 100.0F;
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.emerald), k + 42, l + 109);
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + 42 + 22, l + 109);
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + 42 + 44, l + 109);
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + 42 + 66, l + 109);
-		itemRenderer.zLevel = 0.0F;		
+		itemRenderer.zLevel = 0.0F;
 
 	}
 

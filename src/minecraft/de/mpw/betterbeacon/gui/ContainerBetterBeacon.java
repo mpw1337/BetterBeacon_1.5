@@ -18,6 +18,12 @@ public class ContainerBetterBeacon extends Container {
 		bindPlayerInventory(inventory);
 	}
 
+	/**
+	 * Adds the player inventory to the beacon container
+	 * 
+	 * @param inventory
+	 *            of the player
+	 */
 	protected void bindPlayerInventory(InventoryPlayer inventory) {
 		short short1 = 137;
 		byte b0 = 36;
@@ -33,6 +39,15 @@ public class ContainerBetterBeacon extends Container {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @return if it can interact with player
+	 * 
+	 * @see
+	 * net.minecraft.inventory.Container#canInteractWith(net.minecraft.entity
+	 * .player.EntityPlayer)
+	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return theBetterBeacon.isUseableByPlayer(entityplayer);

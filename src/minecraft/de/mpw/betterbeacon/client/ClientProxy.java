@@ -9,10 +9,15 @@ import de.mpw.betterbeacon.render.ItemBetterBeaconRenderer;
 import de.mpw.betterbeacon.render.TileEntityBetterBeaconRenderer;
 
 public class ClientProxy extends CommonProxy {
+	/*
+	 * (non-Javadoc) registers the renders for the mod
+	 * 
+	 * @see de.mpw.betterbeacon.CommonProxy#initializeRendering()
+	 */
 	@Override
-	public void initializeRendering(){		
+	public void initializeRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBetterBeacon.class, new TileEntityBetterBeaconRenderer());
 		MinecraftForgeClient.registerItemRenderer(BetterBeacon.betterBeacon.blockID, new ItemBetterBeaconRenderer());
 	}
-	
+
 }

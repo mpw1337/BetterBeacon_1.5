@@ -1,8 +1,7 @@
 package de.mpw.betterbeacon;
 
 /**
- * @author Markus
- * this class stores references/path to resources
+ * @author Markus this class stores references/path to resources
  */
 public class CommonProxy {
 	public static String ITEMS_PNG = "/tutorial/generic/items.png";
