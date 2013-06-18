@@ -24,18 +24,18 @@ import de.mpw.betterbeacon.gui.GuiHandler;
 @Mod(modid = "BetterBeacon", name = "Better Beacon", version = "0.0.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class BetterBeacon {
+	// Block ID of the BetterBeaconBlock
 	private final static int BlockBetterBeaconID = 510;
 	public final static int BetterBeaconGuiId = 0;
-	// GenericBlock
+	// BetterBeaconBlock
 	public static Block betterBeacon = new BlockBetterBeacon(BlockBetterBeaconID);
-	//BetterBeaconTileEntity
+	// BetterBeaconTileEntity
 	public static TileEntityBetterBeacon tileEntityBetterBeacon = new TileEntityBetterBeacon();
 	// The instance of your mod that Forge uses.
 	@Instance("BetterBeacon")
 	public static BetterBeacon instance = new BetterBeacon();
 	public static BlockBetterBeacon blockbetterbeacon;
 	private GuiHandler guiHandler = new GuiHandler();
-	
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "de.mpw.betterbeacon.client.ClientProxy", serverSide = "de.mpw.BetterBeacon.CommonProxy")
@@ -48,11 +48,15 @@ public class BetterBeacon {
 
 	@Init
 	public void load(FMLInitializationEvent event) {
+		// register Render
 		proxy.initializeRendering();
+		// register GUI handler
 		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
-		GameRegistry.registerBlock(betterBeacon,"betterBeacon");
+		// register betterBeaconBlock
+		GameRegistry.registerBlock(betterBeacon, "betterBeacon");
 		LanguageRegistry.addName(betterBeacon, "Better Beacon");
 		MinecraftForge.setBlockHarvestLevel(betterBeacon, "pickaxe", 1);
+		// register betterBeaconTileEntity
 		GameRegistry.registerTileEntity(de.mpw.betterbeacon.TileEntityBetterBeacon.class, "tileEntityBetterBeacon");
 	}
 

@@ -12,6 +12,9 @@ import net.minecraft.world.World;
 
 public class BlockBetterBeacon extends BlockContainer {
 
+	/**
+	 * @param par1 Block id
+	 */
 	public BlockBetterBeacon(int par1) {
 		super(par1,Material.glass);
         this.setHardness(3.0F);
@@ -20,11 +23,15 @@ public class BlockBetterBeacon extends BlockContainer {
 		setUnlocalizedName("betterBeacon");
 
 	}
-
+	/**
+	 * Creates the Tile Entity for the Block
+	 */
 	public TileEntity createNewTileEntity(World par1World) {
 		return new TileEntityBetterBeacon();
 	}
-
+	/**
+	 * Open the Gui of the Better Beacon
+	 */
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int par6, float par7, float par8, float par9) {

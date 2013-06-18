@@ -24,12 +24,15 @@ import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityBetterBeacon extends TileEntity implements IInventory {
+	
+	//stores all the potion effects you can get from the beacon.
 	public static final Potion[][] effectsList = new Potion[][] { { Potion.moveSpeed, Potion.jump, Potion.digSpeed }, { Potion.damageBoost },
 			{ Potion.regeneration, Potion.resistance }, { Potion.nightVision, Potion.fireResistance, Potion.invisibility } };
+	//default potion time in game ticks, equals 9 seconds
 	public static final int potionTime = 180;
-
 	private boolean isBeaconActive = false;
 	protected int levels = 1;
+	//active effect
 	protected int effect;
 	protected int effectstrength = 2;
 	protected ItemStack payment;
@@ -37,11 +40,13 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 	protected boolean playereffect = true;
 	protected boolean mobeffect = true;
 	protected boolean animaleffect = true;
-
+	
 	public TileEntityBetterBeacon() {
 		this.isBeaconActive = true;
 	}
-
+	/**
+	 * the beacon checks if it has a valid base and updates the effects in the given range
+	 */
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
@@ -51,25 +56,35 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		}
 		this.isBeaconActive = true;
 	}
-
-	// @Override
+	/**
+	 * @return height of the pyramide
+	 */
 	public int getLevels() {
 		return this.levels;
 	}
-
-	// @Override
+	/**
+	 * @param level sets the amount of levels
+	 */
 	@SideOnly(Side.CLIENT)
 	public void setLevels(int level) {
 		this.levels = level;
 	}
 
+	/* (non-Javadoc)
+	 * @see net.minecraft.tileentity.TileEntity#getDescriptionPacket()
+	 * returns the nbt data of the Beacon and sends it to the package Handler
+	 */
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbttagcom = new NBTTagCompound();
 		this.writeToNBT(nbttagcom);
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 3, nbttagcom);
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see net.minecraft.tileentity.TileEntity#readFromNBT(net.minecraft.nbt.NBTTagCompound)
+	 * reads all atributes from an nbtCompound and writes it to the beacon.
+	 */
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
@@ -91,6 +106,10 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		//this.setInventorySlotContents(0, new ItemStack(256, 1, 0));
 	}
 
+	/* (non-Javadoc)
+	 * @see net.minecraft.tileentity.TileEntity#writeToNBT(net.minecraft.nbt.NBTTagCompound)
+	 * reads the attributes from the beacon and writes it to a nbt tag
+	 */
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
@@ -114,6 +133,9 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		return 65536.0D;
 	}
 
+	/**
+	 * checks the beacon base and the sky and sets the beacon levels and whether it is active or not.
+	 */
 	protected void updateState() {
 		if (!this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) {
 			this.isBeaconActive = false;
@@ -147,6 +169,9 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		}
 	}
 
+	/**
+	 * adds the effects to mobs in the calculated range depending on the chosen mob types.
+	 */
 	protected void addEffects() {
 		if (this.isBeaconActive && this.levels > 0 && !this.worldObj.isRemote && this.effect > 0) {
 			double distance = (double) (this.levels * 10 + 10);
@@ -167,6 +192,10 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		}
 	}
 
+	/**
+	 * Adds the potion effects to all Players in the given range
+	 * @param axisalignedbb range of the affected players
+	 */
 	protected void addEffectsToPlayers(AxisAlignedBB axisalignedbb) {
 		List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
 		Iterator iterator = list.iterator();
@@ -177,6 +206,10 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		}
 	}
 
+	/**
+	 * Adds the potion effects to all hostile mobs in the given range
+	 * @param axisalignedbb range of the affected hostile
+	 */
 	protected void addEffectsToHostile(AxisAlignedBB axisalignedbb) {
 		List list = this.worldObj.getEntitiesWithinAABB(EntityMob.class, axisalignedbb);
 		Iterator iterator = list.iterator();
@@ -187,6 +220,10 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 		}
 	}
 
+	/**
+	 * Adds the potion effects to all animals in the given range
+	 * @param axisalignedbb range of the affected animals
+	 */
 	protected void addEffectsToAnimal(AxisAlignedBB axisalignedbb) {
 		List list = this.worldObj.getEntitiesWithinAABB(EntityAnimal.class, axisalignedbb);
 		Iterator iterator = list.iterator();
