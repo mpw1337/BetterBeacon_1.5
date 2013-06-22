@@ -38,7 +38,7 @@ public class BetterBeacon {
 	private GuiHandler guiHandler = new GuiHandler();
 
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = "de.mpw.betterbeacon.client.ClientProxy", serverSide = "de.mpw.BetterBeacon.CommonProxy")
+	@SidedProxy(clientSide = "de.mpw.betterbeacon.client.ClientProxy", serverSide = "de.mpw.betterbeacon.CommonProxy")
 	public static CommonProxy proxy;
 
 	@PreInit

@@ -50,20 +50,23 @@ public class GuiBetterBeaconButton extends GuiButton {
 	@Override
 	public void drawButton(Minecraft minecraft, int mxPos, int myPos) {
 		if (this.drawButton) {
-			minecraft.renderEngine.bindTexture(buttonTexture);
+			minecraft.renderEngine.bindTexture("/gui/beacon.png");
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.mouseOverButton = mxPos >= this.xPosition && myPos >= this.yPosition && mxPos < this.xPosition + this.width
-					&& myPos < this.yPosition + this.height;
+			this.mouseOverButton = mxPos >= this.xPosition && myPos >= this.yPosition && mxPos < this.xPosition + 22
+					&& myPos < this.yPosition + 22;
 			short buttonYPos = 219;
 			int k = 0;
 			if (!this.enabled) {
-				k += this.width * 2;
+				k += 22 * 2;
 			} else if (this.activated) {
-				k += this.width * 1;
+				k += 22 * 1;
 			} else if (this.mouseOverButton) {
-				k += this.width * 3;
+				k += 22* 3;
 			}
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, k, buttonYPos, this.width, this.height);
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, k, buttonYPos, 22, 22);
+			if(!this.buttonTexture.equals("/gui/beacon.png")){
+				minecraft.renderEngine.bindTexture(this.buttonTexture);
+			}
 			this.drawTexturedModalRect(this.xPosition, this.yPosition, u, v, this.width, this.height);
 		}
 	}

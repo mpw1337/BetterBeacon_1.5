@@ -25,8 +25,8 @@ public class ContainerBetterBeacon extends Container {
 	 *            of the player
 	 */
 	protected void bindPlayerInventory(InventoryPlayer inventory) {
-		short short1 = 137;
-		byte b0 = 36;
+		short short1 = 173;
+		byte b0 = 48;
 		int i;
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {

@@ -18,11 +18,15 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerBeacon;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.StatCollector;
 
 public class GuiBetterBeacon extends GuiContainer {
 
 	private TileEntityBetterBeacon beacon;
+	private static final short pay_pos_y = 145;
+	private static final short pay_pos_x = 150;
+	
 
 	/**
 	 * @param inventory
@@ -34,17 +38,25 @@ public class GuiBetterBeacon extends GuiContainer {
 		super(new ContainerBetterBeacon(tile_entity, inventory));
 		// super(new ContainerBeacon(inventory, tile_entity));
 		this.beacon = tile_entity;
-		this.xSize = 230;
-		this.ySize = 219;
+		this.xSize = 256;
+		this.ySize = 256;
 	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
 		this.buttonList.add(new GuiButton(1, this.guiLeft + 155, this.guiTop + 108, 22, 20, "OK"));
-		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft + 185, this.guiTop + 108, 22, 22, CommonProxy.BETTER_BEACON_GUI, 88, 219));
+		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft + 185, this.guiTop + 108, 22, 22, "/gui/beacon.png", 88, 219));
 		this.buttonList.add(new GuiBetterBeaconEffect(3, this.guiLeft + 40, this.guiTop + 22, 18, 18, 1, this));
-
+		for (int i = 0; i < beacon.effectsList.length; i++) {
+			Potion[] array_element = beacon.effectsList[i];
+			for (int j = 0; j < array_element.length; j++) {
+				Potion potion = array_element[j];
+				this.buttonList.add(new GuiBetterBeaconEffect(3+(i+1)*j, this.guiLeft + 40+(j*25), this.guiTop + 22+(i*25), 18, 18, potion.getId(), this));
+				
+			}
+			
+		}
 	}
 
 	@Override
@@ -59,9 +71,24 @@ public class GuiBetterBeacon extends GuiContainer {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton par1GuiButton) {
+	protected void actionPerformed(GuiButton button) {
 
-		super.actionPerformed(par1GuiButton);
+		// super.actionPerformed(button);
+		if (button.id > 2 && button.getClass().equals(GuiBetterBeaconEffect.class)) {
+			GuiBetterBeaconButton butbetter = (GuiBetterBeaconButton) button;
+			if (!butbetter.activated) {
+				for (Iterator iterator = this.buttonList.iterator(); iterator.hasNext();) {
+					GuiButton guibutton = (GuiButton) iterator.next();
+					if (guibutton.getClass().equals(GuiBetterBeaconEffect.class)) {
+						GuiBetterBeaconEffect b = (GuiBetterBeaconEffect) guibutton;
+						b.activated = false;
+					}
+					butbetter.activated = true;
+				}
+			} else {
+				butbetter.activated = false;
+			}
+		}
 
 	}
 
@@ -118,10 +145,11 @@ public class GuiBetterBeacon extends GuiContainer {
 		// Draws the main gui texture to the center of the screen
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		itemRenderer.zLevel = 100.0F;
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.emerald), k + 42, l + 109);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + 42 + 22, l + 109);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + 42 + 44, l + 109);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + 42 + 66, l + 109);
+		byte spacing = 18;
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.emerald), k + pay_pos_x, l + pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + pay_pos_x + spacing, l + pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + pay_pos_x + spacing*2, l + pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + pay_pos_x + spacing*3, l + pay_pos_y);
 		itemRenderer.zLevel = 0.0F;
 
 	}
