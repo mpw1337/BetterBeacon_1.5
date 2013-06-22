@@ -38,7 +38,8 @@ public class BlockBetterBeacon extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
-		System.out.println(((TileEntityBetterBeacon) tile_entity).getLevels());
+		TileEntityBetterBeacon debug = (TileEntityBetterBeacon) tile_entity;
+		System.out.println("Level"+debug.getLevels()+"Effect:"+debug.getEffect()+"Remote:"+world.isRemote);
 		if (tile_entity == null || player.isSneaking()) {
 			return false;
 		}

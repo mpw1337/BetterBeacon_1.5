@@ -1,5 +1,7 @@
 package de.mpw.betterbeacon.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.Iterator;
 
 import org.lwjgl.opengl.GL11;
@@ -10,6 +12,7 @@ import de.mpw.betterbeacon.render.ModelBetterBeacon;
 import de.mpw.betterbeacon.render.ModelBetterBeaconTechne;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,6 +21,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerBeacon;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.StatCollector;
 
@@ -46,13 +50,14 @@ public class GuiBetterBeacon extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 		this.buttonList.add(new GuiButton(1, this.guiLeft + 155, this.guiTop + 108, 22, 20, "OK"));
-		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft + 185, this.guiTop + 108, 22, 22, "/gui/beacon.png", 88, 219));
+		this.buttonList.add(new GuiBetterBeaconButton(2, this.guiLeft + 185, this.guiTop + 108, 22, 22, "/gui/beacon.png", 90, 220));
 		this.buttonList.add(new GuiBetterBeaconEffect(3, this.guiLeft + 40, this.guiTop + 22, 18, 18, 1, this));
+		byte vertical_spacing = 36;
 		for (int i = 0; i < beacon.effectsList.length; i++) {
 			Potion[] array_element = beacon.effectsList[i];
 			for (int j = 0; j < array_element.length; j++) {
 				Potion potion = array_element[j];
-				this.buttonList.add(new GuiBetterBeaconEffect(3+(i+1)*j, this.guiLeft + 40+(j*25), this.guiTop + 22+(i*25), 18, 18, potion.getId(), this));
+				this.buttonList.add(new GuiBetterBeaconEffect(3+(i+1)*j, this.guiLeft + 40+(j*25), this.guiTop + 22+(i*vertical_spacing), 18, 18, potion.getId(), this));
 				
 			}
 			
@@ -62,6 +67,15 @@ public class GuiBetterBeacon extends GuiContainer {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
+		int ef = beacon.getEffect();
+		for (Object b : buttonList) {
+			if(b.getClass().equals(GuiBetterBeaconEffect.class)){
+				GuiBetterBeaconEffect e = (GuiBetterBeaconEffect)b;
+				if(ef == e.getPotionId()){
+					e.activated = true;
+				}
+			}
+		}
 		/*
 		 * ((GuiBetterBeaconEffect)this.buttonList.get(2)).xPosition =
 		 * this.guiLeft + 40;
@@ -88,6 +102,24 @@ public class GuiBetterBeacon extends GuiContainer {
 			} else {
 				butbetter.activated = false;
 			}
+			this.beacon.setEffect(((GuiBetterBeaconEffect) button).getPotionId());
+		}
+		if(button.id ==1){
+			 String s = "MC|Beacon";
+	            ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
+	            DataOutputStream dataoutputstream = new DataOutputStream(bytearrayoutputstream);
+
+	            try
+	            {
+	                dataoutputstream.writeInt(this.beacon.getEffect());
+	                this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(s, bytearrayoutputstream.toByteArray()));
+	            }
+	            catch (Exception exception)
+	            {
+	                exception.printStackTrace();
+	            }
+
+	            this.mc.displayGuiScreen((GuiScreen)null);
 		}
 
 	}

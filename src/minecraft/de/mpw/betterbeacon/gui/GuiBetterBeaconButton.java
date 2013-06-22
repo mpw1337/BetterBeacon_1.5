@@ -33,7 +33,7 @@ public class GuiBetterBeaconButton extends GuiButton {
 	 *            y offset of the texture
 	 */
 	public GuiBetterBeaconButton(int id, int xPos, int yPos, int width, int height, String textureString, int u, int v) {
-		super(id, xPos, yPos, width, height, "");
+		super(id, xPos, yPos, 22, 22, "");
 		this.buttonTexture = textureString;
 		this.u = u;
 		this.v = v;
@@ -63,11 +63,11 @@ public class GuiBetterBeaconButton extends GuiButton {
 			} else if (this.mouseOverButton) {
 				k += 22* 3;
 			}
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, k, buttonYPos, 22, 22);
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, k, buttonYPos, this.width, this.height);
 			if(!this.buttonTexture.equals("/gui/beacon.png")){
 				minecraft.renderEngine.bindTexture(this.buttonTexture);
 			}
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, u, v, this.width, this.height);
+			this.drawTexturedModalRect(this.xPosition+2, this.yPosition+2, u, v, 18, 18);
 		}
 	}
 

@@ -56,7 +56,6 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 			this.updateState();
 			addEffects();
 		}
-		this.isBeaconActive = true;
 	}
 
 	/**
@@ -73,6 +72,12 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 	@SideOnly(Side.CLIENT)
 	public void setLevels(int level) {
 		this.levels = level;
+	}
+	public void setEffect(int effect){
+		this.effect = effect;
+	}
+	public int getEffect(){
+		return this.effect;
 	}
 
 	/*
