@@ -10,7 +10,12 @@ import net.minecraft.item.ItemStack;
 public class ContainerBetterBeacon extends Container {
 
 	TileEntityBetterBeacon theBetterBeacon;
+
 	protected final SlotBetterBeacon beaconSlot;
+
+	public TileEntityBetterBeacon getBetterBeacon() {
+		return theBetterBeacon;
+	}
 
 	public ContainerBetterBeacon(TileEntityBetterBeacon tile_entity, InventoryPlayer inventory) {
 		this.theBetterBeacon = tile_entity;

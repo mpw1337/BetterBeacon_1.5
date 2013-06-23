@@ -73,10 +73,12 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 	public void setLevels(int level) {
 		this.levels = level;
 	}
-	public void setEffect(int effect){
+
+	public void setEffect(int effect) {
 		this.effect = effect;
 	}
-	public int getEffect(){
+
+	public int getEffect() {
 		return this.effect;
 	}
 
@@ -189,6 +191,38 @@ public class TileEntityBetterBeacon extends TileEntity implements IInventory {
 				this.isBeaconActive = false;
 			}
 		}
+	}
+
+	public int getEffectstrength() {
+		return effectstrength;
+	}
+
+	public void setEffectstrength(int effectstrength) {
+		this.effectstrength = effectstrength;
+	}
+
+	public boolean isPlayereffect() {
+		return playereffect;
+	}
+
+	public void setPlayereffect(boolean playereffect) {
+		this.playereffect = playereffect;
+	}
+
+	public boolean isMobeffect() {
+		return mobeffect;
+	}
+
+	public void setMobeffect(boolean mobeffect) {
+		this.mobeffect = mobeffect;
+	}
+
+	public boolean isAnimaleffect() {
+		return animaleffect;
+	}
+
+	public void setAnimaleffect(boolean animaleffect) {
+		this.animaleffect = animaleffect;
 	}
 
 	/**

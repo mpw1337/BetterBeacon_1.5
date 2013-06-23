@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import org.lwjgl.opengl.GL11;
 
+import de.mpw.betterbeacon.BetterBeacon;
 import de.mpw.betterbeacon.CommonProxy;
 import de.mpw.betterbeacon.TileEntityBetterBeacon;
 import de.mpw.betterbeacon.render.ModelBetterBeacon;
@@ -30,7 +31,6 @@ public class GuiBetterBeacon extends GuiContainer {
 	private TileEntityBetterBeacon beacon;
 	private static final short pay_pos_y = 145;
 	private static final short pay_pos_x = 150;
-	
 
 	/**
 	 * @param inventory
@@ -57,10 +57,11 @@ public class GuiBetterBeacon extends GuiContainer {
 			Potion[] array_element = beacon.effectsList[i];
 			for (int j = 0; j < array_element.length; j++) {
 				Potion potion = array_element[j];
-				this.buttonList.add(new GuiBetterBeaconEffect(3+(i+1)*j, this.guiLeft + 40+(j*25), this.guiTop + 22+(i*vertical_spacing), 18, 18, potion.getId(), this));
-				
+				this.buttonList.add(new GuiBetterBeaconEffect(3 + (i + 1) * j, this.guiLeft + 40 + (j * 25), this.guiTop + 22
+						+ (i * vertical_spacing), 18, 18, potion.getId(), this));
+
 			}
-			
+
 		}
 	}
 
@@ -69,9 +70,9 @@ public class GuiBetterBeacon extends GuiContainer {
 		super.updateScreen();
 		int ef = beacon.getEffect();
 		for (Object b : buttonList) {
-			if(b.getClass().equals(GuiBetterBeaconEffect.class)){
-				GuiBetterBeaconEffect e = (GuiBetterBeaconEffect)b;
-				if(ef == e.getPotionId()){
+			if (b.getClass().equals(GuiBetterBeaconEffect.class)) {
+				GuiBetterBeaconEffect e = (GuiBetterBeaconEffect) b;
+				if (ef == e.getPotionId()) {
 					e.activated = true;
 				}
 			}
@@ -104,22 +105,25 @@ public class GuiBetterBeacon extends GuiContainer {
 			}
 			this.beacon.setEffect(((GuiBetterBeaconEffect) button).getPotionId());
 		}
-		if(button.id ==1){
-			 String s = "MC|Beacon";
-	            ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
-	            DataOutputStream dataoutputstream = new DataOutputStream(bytearrayoutputstream);
+		if (button.id == 1) {
+			ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
+			DataOutputStream dataoutputstream = new DataOutputStream(bytearrayoutputstream);
 
-	            try
-	            {
-	                dataoutputstream.writeInt(this.beacon.getEffect());
-	                this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(s, bytearrayoutputstream.toByteArray()));
-	            }
-	            catch (Exception exception)
-	            {
-	                exception.printStackTrace();
-	            }
+			try {
+				// Write Type
+				dataoutputstream.writeInt(this.beacon.getEffect());
+				// Write Strength
+				dataoutputstream.writeInt(this.beacon.getEffectstrength());
+				// Write the states of the affected Mob types
+				dataoutputstream.writeBoolean(this.beacon.isPlayereffect());
+				dataoutputstream.writeBoolean(this.beacon.isAnimaleffect());
+				dataoutputstream.writeBoolean(this.beacon.isMobeffect());
+				this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(BetterBeacon.guiChannel, bytearrayoutputstream.toByteArray()));
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
 
-	            this.mc.displayGuiScreen((GuiScreen)null);
+			this.mc.displayGuiScreen((GuiScreen) null);
 		}
 
 	}
@@ -179,9 +183,12 @@ public class GuiBetterBeacon extends GuiContainer {
 		itemRenderer.zLevel = 100.0F;
 		byte spacing = 18;
 		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.emerald), k + pay_pos_x, l + pay_pos_y);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + pay_pos_x + spacing, l + pay_pos_y);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + pay_pos_x + spacing*2, l + pay_pos_y);
-		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + pay_pos_x + spacing*3, l + pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.diamond), k + pay_pos_x + spacing, l
+				+ pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotGold), k + pay_pos_x + spacing * 2,
+				l + pay_pos_y);
+		itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, new ItemStack(Item.ingotIron), k + pay_pos_x + spacing * 3,
+				l + pay_pos_y);
 		itemRenderer.zLevel = 0.0F;
 
 	}

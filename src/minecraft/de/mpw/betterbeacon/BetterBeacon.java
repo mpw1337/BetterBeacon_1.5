@@ -22,11 +22,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import de.mpw.betterbeacon.gui.GuiHandler;
 
 @Mod(modid = "BetterBeacon", name = "Better Beacon", version = "0.0.0")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "BB|Gui" }, packetHandler = ServerPacketHandler.class)
 public class BetterBeacon {
 	// Block ID of the BetterBeaconBlock
 	private final static int BlockBetterBeaconID = 510;
 	public final static int BetterBeaconGuiId = 0;
+	public final static String guiChannel = "BB|Gui";
 	// BetterBeaconBlock
 	public static Block betterBeacon = new BlockBetterBeacon(BlockBetterBeaconID);
 	// BetterBeaconTileEntity
